@@ -1,13 +1,17 @@
 <template>
   <q-card-actions>
-    <q-btn color="green" v-on:click="SendAndRequest(senddata, 1, 0, 'mykey', true)">Apply</q-btn>
-    <q-btn color="orange" v-on:click="SendAndRequest(senddata, 1, 1, 'mykey', true)">Save</q-btn>
-    <q-btn color="red" v-on:click="SendAndRequest(senddata, 1, 2, 'mykey', true)">Save & Reboot</q-btn>
+    <q-btn color="green"
+      v-on:click="PostData(senddata, 1, 0, ShowDelayDialog('Data applying...', 1000, null))">Apply</q-btn>
+    <q-btn color="orange"
+      v-on:click="PostData(senddata, 1, 1, ShowDelayDialog('Data saving...', 1000, null))">Save</q-btn>
+    <q-btn color="red"
+      v-on:click="PostData(senddata, 1, 2, ShowDelayDialog('Data saving and reboot...', 10000, null))">Save &
+      Reboot</q-btn>
   </q-card-actions>
 </template>
 
 <script setup>
-import { SendAndRequest } from "components/webguicomp/network";
-//import { defineProps } from "vue";
+import { PostData } from "components/webguicomp/network";
+import { ShowDelayDialog } from "./helpers";
 const props = defineProps(['senddata']);
 </script>

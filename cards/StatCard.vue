@@ -30,7 +30,7 @@
 
 <script setup>
 import { computed, onUnmounted, reactive, onMounted } from "vue";
-import { SendAndRequest } from "components/webguicomp/network";
+import { PostData } from "components/webguicomp/network";
 import { secondsToHms } from "components/webguicomp/helpers"
 
 defineOptions({
@@ -50,12 +50,12 @@ const init = {
   free_ram_min: 0
 }
 const data = reactive(init);
-SendAndRequest(data, 2, 0, 'mykey', false);
+PostData(data, 2, 0, null);
 
 let intervalId
 onMounted(() => {
   intervalId = setInterval(() => {
-    SendAndRequest(data, 2, 0, 'mykey', false);
+    PostData(data, 2, 0, null);
   }, 1000)
 })
 onUnmounted(() => clearInterval(intervalId))

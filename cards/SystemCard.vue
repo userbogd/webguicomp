@@ -24,7 +24,7 @@
 
 <script setup>
 import { reactive } from "vue";
-import { SendAndRequest } from "components/webguicomp/network"
+import { PostData } from "components/webguicomp/network"
 import CardActions from "components/webguicomp/CardActions.vue"
 
 defineOptions({
@@ -35,5 +35,5 @@ const init = {
   model_name: "", hw_rev: 0, fw_rev: "", idf_rev: "", build_date: "", ser_num: ""
 }
 const data = reactive(init);
-SendAndRequest(data, 2, 0, 'mykey', false);
+PostData(data, 2, 0, null);
 </script>

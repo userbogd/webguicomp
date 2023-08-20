@@ -35,7 +35,7 @@
 
 <script setup>
 import { computed, reactive } from "vue";
-import { SendAndRequest } from "components/webguicomp/network";
+import { PostData } from "components/webguicomp/network";
 import { useQuasar } from 'quasar'
 import SelectWiFiDialog from 'components/webguicomp/SelectWiFiDialog.vue'
 import CardActions from "components/webguicomp/CardActions.vue"
@@ -74,7 +74,7 @@ function OpenScanDialog() {
   });
 };
 
-SendAndRequest(data, 2, 0, 'mykey', false);
+PostData(data, 2, 0, null);
 
 
 </script>

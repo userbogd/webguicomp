@@ -1,26 +1,9 @@
 import { api } from "boot/axios";
 import { sha256 } from "js-sha256";
-import { Notify, Dialog } from "quasar";
+import { Notify } from "quasar";
 
 const API_URL = "/api";
 const SHA256_HMAC_KEY = "mykey";
-
-function ShowSaveDialog(apltype) {
-  const opername = ['Data applying...', 'Data saving...', 'Data saving and reboot...'];
-  let step = (apltype == 2) ? 1 : 10;
-  let percentage = 0;
-  const dialog = Dialog.create({ message: opername[apltype], progress: true, persistent: true, ok: false })
-  const interval = setInterval(() => {
-    percentage = Math.min(100, percentage + step);
-    dialog.update({
-      message: `${opername[apltype]} ${percentage}%`
-    })
-    if (percentage === 100) {
-      clearInterval(interval);
-      setTimeout(() => { dialog.hide() }, 350)
-    }
-  }, 100)
-}
 
 function PostData(varlist, messtype, applytype, onfinished) {
   var pld = {};
@@ -50,12 +33,7 @@ function PostData(varlist, messtype, applytype, onfinished) {
 
 }
 
-function SendAndRequest(varlist, mstp, apltp, shakey, okreport) {
-  var onfinish = (okreport) ? () => { ShowSaveDialog(apltp) } : null;
-  PostData(varlist, mstp, apltp, onfinish);
-}
-
-export { SendAndRequest, PostData };
+export { PostData };
 
 
 

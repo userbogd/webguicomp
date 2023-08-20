@@ -21,7 +21,7 @@
 
 <script setup>
 import { reactive } from "vue";
-import { SendAndRequest } from "components/webguicomp/network";
+import { PostData } from "components/webguicomp/network";
 import CardActions from "components/webguicomp/CardActions.vue"
 
 defineOptions({
@@ -33,6 +33,6 @@ const init = {
 }
 
 const data = reactive(init);
-SendAndRequest(data, 2, 0, 'mykey', false);
+PostData(data, 2, 0, null);
 
 </script>
