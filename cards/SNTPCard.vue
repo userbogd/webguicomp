@@ -6,10 +6,10 @@
     <q-card-section class="q-pt-none">
       <div class="q-pa-md">
         <div class="q-gutter-md q-pa-none q-pb-none">
-          <q-toggle :dense="true" v-model="data.sntp_enab" label="Eanble SNTP" />
-          <q-input :dense="true" v-model="data.sntp_serv1" label="SNTP server 1:" />
-          <q-input :dense="true" v-model="data.sntp_serv2" label="SNTP server 2:" />
-          <q-input :dense="true" v-model="data.sntp_serv3" label="SNTP server 3:" />
+          <q-toggle v-model="data.sntp_enab" label="Eanble SNTP" />
+          <q-input v-model="data.sntp_serv1" label="SNTP server 1:" />
+          <q-input v-model="data.sntp_serv2" label="SNTP server 2:" />
+          <q-input v-model="data.sntp_serv3" label="SNTP server 3:" />
         </div>
       </div>
     </q-card-section>

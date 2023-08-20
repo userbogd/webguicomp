@@ -7,25 +7,25 @@
     <q-card-section class="q-pt-none">
       <div class="q-pa-md">
         <div class="q-gutter-md q-pa-none q-pb-none">
-          <q-toggle :dense="true" v-model="data.wifi_enab" label="WiFi enable" />
+          <q-toggle v-model="data.wifi_enab" label="WiFi enable" />
           <q-btn color="primary" label="Scan WiFi" @click="OpenScanDialog()"></q-btn>
-          <q-select :dense="true" v-model="wifimodestr" :options="wifimodes" :map-options="true" :emit-value="true"
+          <q-select v-model="wifimodestr" :options="wifimodes" :map-options="true" :emit-value="true"
             label="WiFi mode"></q-select>
-          <q-input :dense="true" v-model="wifipwr" label="Max power, dBm" />
-          <q-input :dense="true" v-model="data.wifi_ap_ssid" label="WiFi network name(AP):" />
-          <q-input :dense="true" v-model="data.wifi_ap_key" label="WiFi network key(AP):" />
-          <q-input :dense="true" v-model="data.wifi_ap_ip" label="IP address(AP):" />
-          <q-input :dense="true" v-model="data.wifi_sta_ssid" label="WiFi network name(CLN):" />
-          <q-input :dense="true" v-model="data.wifi_sta_key" label="WiFi network key(CLN):" />
-          <q-toggle :dense="true" v-model="data.wifi_isdhcp" label="DHCP enabled"></q-toggle>
-          <q-input :dense="true" v-model="data.wifi_sta_ip" label="IP address(CLN):" />
-          <q-input :dense="true" v-model="data.wifi_sta_mask" label="Subnet mask(CLN):" />
-          <q-input :dense="true" v-model="data.wifi_sta_gw" label="Gateway address(CLN):" />
-          <q-input :dense=true v-model="data.wifi_dns1" label="DNS1:" />
-          <q-input :dense=true v-model="data.wifi_dns2" label="DNS2:" />
-          <q-input :dense=true v-model="data.wifi_dns3" label="DNS3:" />
-          <q-input :dense=true v-model="data.wifi_sta_mac" label="MAC(CLN):" />
-          <q-input :dense=true v-model="data.wifi_ap_mac" label="MAC(AP):" />
+          <q-input v-model="wifipwr" label="Max power, dBm" />
+          <q-input v-model="data.wifi_ap_ssid" label="WiFi network name(AP):" />
+          <q-input v-model="data.wifi_ap_key" label="WiFi network key(AP):" />
+          <q-input v-model="data.wifi_ap_ip" label="IP address(AP):" />
+          <q-input v-model="data.wifi_sta_ssid" label="WiFi network name(CLN):" />
+          <q-input v-model="data.wifi_sta_key" label="WiFi network key(CLN):" />
+          <q-toggle v-model="data.wifi_isdhcp" label="DHCP enabled"></q-toggle>
+          <q-input v-model="data.wifi_sta_ip" label="IP address(CLN):" />
+          <q-input v-model="data.wifi_sta_mask" label="Subnet mask(CLN):" />
+          <q-input v-model="data.wifi_sta_gw" label="Gateway address(CLN):" />
+          <q-input v-model="data.wifi_dns1" label="DNS1:" />
+          <q-input v-model="data.wifi_dns2" label="DNS2:" />
+          <q-input v-model="data.wifi_dns3" label="DNS3:" />
+          <q-input v-model="data.wifi_sta_mac" label="MAC(CLN):" />
+          <q-input v-model="data.wifi_ap_mac" label="MAC(AP):" />
         </div>
       </div>
     </q-card-section>

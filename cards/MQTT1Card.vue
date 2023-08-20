@@ -6,14 +6,14 @@
     <q-card-section class="q-pt-none">
       <div class="q-pa-md">
         <div class="q-gutter-md q-pa-none q-pb-none">
-          <q-toggle :dense="true" v-model="data.mqtt_1_enab" label="Eanble MQTT 1" />
-          <q-input :dense="true" v-model="data.mqtt_1_serv" label="MQTT broker URL	" />
-          <q-input :dense="true" v-model="data.mqtt_1_port" label="MQTT broker port	" />
-          <q-input :dense="true" v-model="data.mqtt_1_syst" label="Global system name	" />
-          <q-input :dense="true" v-model="data.mqtt_1_group" label="Group name	" />
-          <q-input :dense="true" v-model="data.mqtt_1_clid" label="Device ID prefix" />
-          <q-input :dense="true" v-model="data.mqtt_1_uname" label="Login" />
-          <q-input :dense="true" v-model="data.mqtt_1_pass" label="Password" />
+          <q-toggle v-model="data.mqtt_1_enab" label="Eanble MQTT 1" />
+          <q-input v-model="data.mqtt_1_serv" label="MQTT broker URL	" />
+          <q-input v-model="data.mqtt_1_port" label="MQTT broker port	" />
+          <q-input v-model="data.mqtt_1_syst" label="Global system name	" />
+          <q-input v-model="data.mqtt_1_group" label="Group name	" />
+          <q-input v-model="data.mqtt_1_clid" label="Device ID prefix" />
+          <q-input v-model="data.mqtt_1_uname" label="Login" />
+          <q-input v-model="data.mqtt_1_pass" label="Password" />
         </div>
       </div>
     </q-card-section>

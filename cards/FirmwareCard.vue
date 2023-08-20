@@ -6,10 +6,10 @@
     <q-card-section class="q-pt-none">
       <div class="q-pa-md">
         <div class="q-gutter-md q-pa-none q-pb-none">
-          <q-toggle :dense="true" v-model="data.ota_enab" label="Eanble OTA autoudate" />
-          <q-toggle :dense="true" v-model="data.res_ota_enab" label="Enable reset after update" />
-          <q-input :dense="true" v-model="data.ota_url" label="OTA firmware file URL" />
-          <q-input :dense="true" v-model="data.ota_auto_int" label="New firmware check interval, sec" />
+          <q-toggle v-model="data.ota_enab" label="Eanble OTA autoudate" />
+          <q-toggle v-model="data.res_ota_enab" label="Enable reset after update" />
+          <q-input v-model="data.ota_url" label="OTA firmware file URL" />
+          <q-input v-model="data.ota_auto_int" label="New firmware check interval, sec" />
           <div>Current firmware version:: {{ data.fw_rev }}</div>
           <div>Available firmware version:: {{ data.fw_rev }}</div>
         </div>

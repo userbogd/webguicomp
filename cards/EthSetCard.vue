@@ -7,15 +7,15 @@
     <q-card-section class="q-pt-none">
       <div class="q-pa-md">
         <div class="q-gutter-md q-pa-none q-pb-none">
-          <q-toggle :dense="true" v-model="data.eth_enab" label="Ethernet enable" />
-          <q-input :dense="true" v-model="data.eth_ip" label="IP address:" />
-          <q-input :dense="true" v-model="data.eth_mask" label="Subnet mask:" />
-          <q-input :dense="true" v-model="data.eth_gw" label="Gateway address:" />
-          <q-toggle :dense="true" v-model="data.eth_isdhcp" label="DHCP enabled"></q-toggle>
-          <q-input :dense=true v-model="data.eth_dns1" label="DNS1:" />
-          <q-input :dense=true v-model="data.eth_dns2" label="DNS2:" />
-          <q-input :dense=true v-model="data.eth_dns3" label="DNS3:" />
-          <q-input :dense=true v-model="data.eth_mac" label="MAC:" />
+          <q-toggle v-model="data.eth_enab" label="Ethernet enable" />
+          <q-input v-model="data.eth_ip" label="IP address:" />
+          <q-input v-model="data.eth_mask" label="Subnet mask:" />
+          <q-input v-model="data.eth_gw" label="Gateway address:" />
+          <q-toggle v-model="data.eth_isdhcp" label="DHCP enabled"></q-toggle>
+          <q-input v-model="data.eth_dns1" label="DNS1:" />
+          <q-input v-model="data.eth_dns2" label="DNS2:" />
+          <q-input v-model="data.eth_dns3" label="DNS3:" />
+          <q-input v-model="data.eth_mac" label="MAC:" />
         </div>
       </div>
     </q-card-section>
