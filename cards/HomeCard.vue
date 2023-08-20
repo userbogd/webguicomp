@@ -16,8 +16,8 @@
 
 <script setup>
 import { computed, onUnmounted, reactive, onMounted } from "vue";
-import { SendAndRequest } from "boot/network";
-import { secondsToHms } from "boot/helpers"
+import { SendAndRequest } from "components/webguicomp//network";
+import { secondsToHms } from "components/webguicomp/helpers"
 
 defineOptions({
   name: 'HomeCard'

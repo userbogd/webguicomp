@@ -21,7 +21,7 @@
 
 <script setup>
 import { useDialogPluginComponent } from 'quasar'
-import { PostData } from "boot/network";
+import { PostData } from "components/webguicomp/network";
 import { reactive, ref } from 'vue';
 
 defineEmits([

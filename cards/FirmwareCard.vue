@@ -21,7 +21,7 @@
 
 <script setup>
 import { reactive } from "vue";
-import { SendAndRequest } from "boot/network";
+import { SendAndRequest } from "components/webguicomp/network";
 import CardActions from "components/webguicomp/CardActions.vue"
 
 defineOptions({

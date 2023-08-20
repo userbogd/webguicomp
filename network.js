@@ -22,8 +22,6 @@ function ShowSaveDialog(apltype) {
   }, 100)
 }
 
-
-
 function PostData(varlist, messtype, applytype, onfinished) {
   var pld = {};
   var data = {};

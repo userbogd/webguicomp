@@ -8,6 +8,6 @@
 
 <script setup>
 import { SendAndRequest } from "components/webguicomp/network";
-import { defineProps } from "vue";
+//import { defineProps } from "vue";
 const props = defineProps(['senddata']);
 </script>
