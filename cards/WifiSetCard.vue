@@ -11,7 +11,7 @@
           <q-btn color="primary" label="Scan WiFi" @click="OpenScanDialog()"></q-btn>
           <q-select v-model="wifimodestr" :options="wifimodes" :map-options="true" :emit-value="true"
             label="WiFi mode"></q-select>
-          <q-input v-model="wifipwr" label="Max power, dBm" />
+          <q-input type="number" v-model="wifipwr" label="Max power, dBm" />
           <q-input v-model="data.wifi_ap_ssid" label="WiFi network name(AP):" />
           <q-input type="password" v-model="data.wifi_ap_key" label="WiFi network key(AP):" />
           <q-input v-model="data.wifi_ap_ip" label="IP address(AP):" />
