@@ -19,17 +19,13 @@
         </div>
       </div>
     </q-card-section>
-    <q-card-actions>
-      <q-btn flat v-on:click="SendAndRequest(data, 1, 0, 'mykey', true)">Apply</q-btn>
-      <q-btn flat v-on:click="SendAndRequest(data, 1, 1, 'mykey', true)">Save</q-btn>
-      <q-btn flat v-on:click="SendAndRequest(data, 1, 2, 'mykey', true)">Save&Reboot</q-btn>
-    </q-card-actions>
-
+    <CardActions :senddata="data"></CardActions>
   </q-card>
 </template>
 <script setup>
 import { reactive } from "vue";
 import { SendAndRequest } from "boot/network";
+import CardActions from "components/webguicomp/CardActions.vue"
 
 defineOptions({
   name: 'EthSetCard'

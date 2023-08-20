@@ -6,34 +6,25 @@
     <q-card-section class="q-pt-none">
       <div class="q-pa-md">
         <div class="q-gutter-md q-pa-none q-pb-none">
-          <q-toggle :dense="true" v-model="data.mqtt_2_enab" label="Eanble MQTT 2" />
-          <q-input :dense="true" v-model="data.mqtt_2_serv" label="MQTT broker URL	" />
-          <q-input :dense="true" v-model="data.mqtt_2_port" label="MQTT broker port	" />
-          <q-input :dense="true" v-model="data.mqtt_2_syst" label="Global system name	" />
-          <q-input :dense="true" v-model="data.mqtt_2_group" label="Group name	" />
-          <q-input :dense="true" v-model="data.mqtt_2_clid" label="Device ID prefix" />
-          <q-input :dense="true" v-model="data.mqtt_2_uname" label="Login" />
-          <q-input :dense="true" v-model="data.mqtt_2_pass" label="Password" />
+          <q-toggle v-model="data.mqtt_2_enab" label="Eanble MQTT 2" />
+          <q-input v-model="data.mqtt_2_serv" label="MQTT broker URL	" />
+          <q-input v-model="data.mqtt_2_port" label="MQTT broker port	" />
+          <q-input v-model="data.mqtt_2_syst" label="Global system name	" />
+          <q-input v-model="data.mqtt_2_group" label="Group name	" />
+          <q-input v-model="data.mqtt_2_clid" label="Device ID prefix" />
+          <q-input v-model="data.mqtt_2_uname" label="Login" />
+          <q-input v-model="data.mqtt_2_pass" label="Password" />
         </div>
       </div>
     </q-card-section>
-
-    <q-card-actions>
-      <q-btn flat v-on:click="SendAndRequest(data, 1, 0, 'mykey', true)">Apply</q-btn>
-      <q-btn flat v-on:click="SendAndRequest(data, 1, 1, 'mykey', true)">Save</q-btn>
-      <q-btn flat v-on:click="SendAndRequest(data, 1, 2, 'mykey', true)">Save&Reboot</q-btn>
-    </q-card-actions>
-
-    <CardActions />
-
+    <CardActions :senddata="data"></CardActions>
   </q-card>
 </template>
-
-
 
 <script setup>
 import { reactive } from "vue";
 import { SendAndRequest } from "boot/network";
+import CardActions from "components/webguicomp/CardActions.vue"
 
 const init = {
   mqtt_2_enab: false,
