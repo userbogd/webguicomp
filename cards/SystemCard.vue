@@ -8,7 +8,7 @@
         <div class="q-gutter-md q-pa-none q-pb-none">
           <q-input v-model="data.net_bios_name" label="Device bios name" />
           <q-input v-model="data.sys_name" label="User name" />
-          <q-input v-model="data.sys_pass" label="User password" />
+          <q-input type="password" v-model="data.sys_pass" label="User password" />
           <div>Device model: {{ data.model_name }}</div>
           <div>Hardware revision: {{ data.hw_rev }}</div>
           <div>Firmware version: {{ data.fw_rev }}</div>

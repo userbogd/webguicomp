@@ -13,10 +13,10 @@
             label="WiFi mode"></q-select>
           <q-input v-model="wifipwr" label="Max power, dBm" />
           <q-input v-model="data.wifi_ap_ssid" label="WiFi network name(AP):" />
-          <q-input v-model="data.wifi_ap_key" label="WiFi network key(AP):" />
+          <q-input type="password" v-model="data.wifi_ap_key" label="WiFi network key(AP):" />
           <q-input v-model="data.wifi_ap_ip" label="IP address(AP):" />
           <q-input v-model="data.wifi_sta_ssid" label="WiFi network name(CLN):" />
-          <q-input v-model="data.wifi_sta_key" label="WiFi network key(CLN):" />
+          <q-input type="password" v-model="data.wifi_sta_key" label="WiFi network key(CLN):" />
           <q-toggle v-model="data.wifi_isdhcp" label="DHCP enabled"></q-toggle>
           <q-input v-model="data.wifi_sta_ip" label="IP address(CLN):" />
           <q-input v-model="data.wifi_sta_mask" label="Subnet mask(CLN):" />

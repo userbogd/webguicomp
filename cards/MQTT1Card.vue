@@ -8,12 +8,12 @@
         <div class="q-gutter-md q-pa-none q-pb-none">
           <q-toggle v-model="data.mqtt_1_enab" label="Eanble MQTT 1" />
           <q-input v-model="data.mqtt_1_serv" label="MQTT broker URL	" />
-          <q-input v-model="data.mqtt_1_port" label="MQTT broker port	" />
+          <q-input type="number" v-model="data.mqtt_1_port" label="MQTT broker port	" />
           <q-input v-model="data.mqtt_1_syst" label="Global system name	" />
           <q-input v-model="data.mqtt_1_group" label="Group name	" />
           <q-input v-model="data.mqtt_1_clid" label="Device ID prefix" />
           <q-input v-model="data.mqtt_1_uname" label="Login" />
-          <q-input v-model="data.mqtt_1_pass" label="Password" />
+          <q-input type="password" v-model="data.mqtt_1_pass" label="Password" />
         </div>
       </div>
     </q-card-section>
