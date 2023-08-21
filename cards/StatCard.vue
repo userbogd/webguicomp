@@ -38,8 +38,7 @@ defineOptions({
 })
 
 const init = {
-  time: 0,
-  uptime: 0,
+  time: 0, uptime: 0,
   wifi_level: "",
   eth_stat: "",
   wifi_stat: "",
@@ -50,8 +49,6 @@ const init = {
   free_ram_min: 0
 }
 const data = reactive(init);
-PostData(data, 2, 0, null);
-
 let intervalId
 onMounted(() => {
   intervalId = setInterval(() => {
@@ -61,5 +58,5 @@ onMounted(() => {
 onUnmounted(() => clearInterval(intervalId))
 const timestr = computed({ get() { return (new Date(data.time * 1000).toISOString()) } })
 const uptimestr = computed({ get() { return (secondsToHms(data.uptime)) } })
-
+PostData(data, 2, 0, null);
 </script>

@@ -11,10 +11,9 @@
           <q-input v-model="data.ota_url" label="OTA firmware file URL" />
           <q-input type="number" v-model="data.ota_auto_int" label="New firmware check interval, sec" />
           <div>Current firmware version: {{ data.fw_rev }}</div>
-          <div>Available firmware version: {{ data.fw_rev }}</div>
-          <div>Firmware status: <div v-html="data.ota_state"></div>
-          </div>
-          <q-btn color="primary" label="Check firmware" @click="PostData({ ota_start: 1 }, 2, 0, null)"></q-btn>
+          <div>Available firmware version: {{ data.ota_newver }}</div>
+          <div>Firmware status: <span v-html="data.ota_state"></span></div>
+          <q-btn color="primary" label="Check firmware" @click="CheckFirmware"></q-btn>
         </div>
       </div>
     </q-card-section>
@@ -23,7 +22,7 @@
 </template>
 
 <script setup>
-import { reactive } from "vue";
+import { reactive, onUnmounted } from "vue";
 import { PostData } from "components/webguicomp/network";
 import CardActions from "components/webguicomp/CardActions.vue"
 
@@ -36,6 +35,14 @@ const init = {
   ota_auto_int: 0, fw_rev: '', ota_newver: '', ota_state: ''
 }
 const data = reactive(init);
-PostData(data, 2, 0, null);
 
+let intervalId;
+function CheckFirmware() {
+  PostData({ ota_start: 1 }, 2, 0, null);
+  intervalId = setInterval(() => {
+    PostData(data, 2, 0, null);
+  }, 1000)
+}
+onUnmounted(() => clearInterval(intervalId));
+PostData(data, 2, 0, null);
 </script>
