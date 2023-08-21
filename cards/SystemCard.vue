@@ -22,6 +22,24 @@
   </q-card>
 </template>
 
+<style>
+.clerr .clwarn .clok {
+  font-weight: bold;
+}
+
+.clerr {
+  color: #b00000;
+}
+
+.clwarn {
+  color: #b0b000;
+}
+
+.clok {
+  color: #00b000;
+}
+</style>
+
 <script setup>
 import { reactive } from "vue";
 import { PostData } from "components/webguicomp/network"

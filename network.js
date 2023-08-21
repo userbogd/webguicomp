@@ -18,6 +18,7 @@ function PostData(varlist, messtype, applytype, onfinished) {
   pld.data = data;
   pld.signature = sha256.hmac(SHA256_HMAC_KEY, JSON.stringify(data));
 
+
   api
     .post(API_URL, JSON.stringify(pld), {
       headers: { "Content-Type": "application/json" },

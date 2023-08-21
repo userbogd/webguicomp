@@ -1,0 +1,32 @@
+.body {
+  background: #e0e0e0;
+}
+.card {
+ border-radius: 10px;
+ font-family: monospace;
+ font-size: medium;
+ break-inside: avoid;
+ margin: 0 0 10px 10px;
+}
+
+.cardholder {
+ column-count: 1;
+ column-gap: 0;
+
+ padding: 10px 10px 10px 0;
+}
+@media (min-width: 1024px) {
+ .cardholder {
+   column-count: 2;
+ }
+}
+@media (min-width: 1400px) {
+ .cardholder {
+   column-count: 3;
+ }
+}
+
+.clerr .clwarn .clok {font-weight:bold;}
+.clerr {color:#b00000;}
+.clwarn {color:#b0b000;}
+.clok {color:#00b000;}
