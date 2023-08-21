@@ -12,9 +12,9 @@
           <q-input type="number" v-model="data.ota_auto_int" label="New firmware check interval, sec" />
           <div>Current firmware version: {{ data.fw_rev }}</div>
           <div>Available firmware version: {{ data.fw_rev }}</div>
-          <div>Firmware status: {{ data.ota_state }}
+          <div>Firmware status: <div v-html="data.ota_state"></div>
           </div>
-          <q-btn color="primary" label="Check firmware" @click="CheckFirmware()"></q-btn>
+          <q-btn color="primary" label="Check firmware" @click="PostData({ ota_start: 1 }, 2, 0, null)"></q-btn>
         </div>
       </div>
     </q-card-section>
@@ -35,10 +35,7 @@ const init = {
   ota_enab: false, res_ota_enab: false, ota_url: '',
   ota_auto_int: 0, fw_rev: '', ota_newver: '', ota_state: ''
 }
-
 const data = reactive(init);
 PostData(data, 2, 0, null);
-function CheckFirmware() {
-  PostData({ ota_start: 1 }, 2, 0, () => { });
-}
+
 </script>
