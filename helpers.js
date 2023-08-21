@@ -14,7 +14,8 @@ function ShowDelayDialog(mess, time, onexpire) {
     message: '',
     progress: true,
     persistent: true, // we want the user to not be able to close it
-    ok: false // we want the user to not be able to close it
+    ok: false, // we want the user to not be able to close it
+    square: true
   })
 
   let percentage = 0
