@@ -14,6 +14,7 @@
           <q-input v-model="data.mqtt_2_clid" label="Device ID prefix" />
           <q-input v-model="data.mqtt_2_uname" label="Login" />
           <q-input type="password" v-model="data.mqtt_2_pass" label="Password" />
+          <q-btn label="Test MQTT" @click="PostData({ mqtt_1_test: '' }, 1, 0)"></q-btn>
         </div>
       </div>
     </q-card-section>
