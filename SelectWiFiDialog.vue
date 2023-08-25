@@ -7,8 +7,8 @@
           <div>Scanning WiFi...</div>
         </q-card-section>
         <q-card-section v-else>
-          <q-table title="WiFi networks" :flat="true" :rows="scandata.wifi_scan_res" :columns="columns" row-key="ssid"
-            hide-no-data="true" wrap-cells="true" @row-click="ClickOnRaw" />
+          <q-table title="WiFi networks" :flat="true" :wrap-cells="true" :rows="scandata.wifi_scan_res" :columns="columns" row-key="ssid"
+            :rows-per-page-options="[0]" :pagination="pagination" @row-click="ClickOnRaw" />
         </q-card-section>
         <q-card-actions align="center">
           <q-btn label="Cancel" @click="onDialogCancel" />
@@ -67,9 +67,14 @@ const scandata = reactive({ wifi_scan_res: 10 });
 PostData({ wifi_scan: 1 }, 2, 0, () => { });
 setTimeout(() => { PostData(scandata, 2, 0, () => onDataReady()) }, 7000);
 
+const pagination = {
+  page: 1,
+  rowsPerPage: 0
+}
+
 const columns = [
   { name: 'ssid', label: 'SSID', align: 'left', field: 'ssid', sortable: true },
   { name: 'rssi', label: 'RSSI', field: 'rssi', sortable: true },
-  { name: 'ch', label: 'CHANNEL', field: 'ch', sortable: true },
+  { name: 'ch', label: 'CH', field: 'ch', sortable: true },
 ]
 </script>
