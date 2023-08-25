@@ -2,16 +2,15 @@
   <q-dialog ref="dialogRef" @hide="onDialogHide">
     <q-card class="q-dialog-plugin">
       <div class="q-pa-md q-gutter-md">
-        <q-card-section>
-          <q-inner-loading :showing="visible" label="Scaning WiFi..." label-class="text-teal"
-            label-style="font-size: 1.1em" />
+        <q-card-section v-if="visible" align="center">
+          <div><q-circular-progress indeterminate size="50px" color="primary" class="q-ma-md"></q-circular-progress></div>
+          <div>Scanning WiFi...</div>
         </q-card-section>
-        <q-card-section>
-          <q-table title="WiFi networks" :rows="scandata.wifi_scan_res" :columns="columns" row-key="ssid"
+        <q-card-section v-else>
+          <q-table title="WiFi networks" :flat="true" :rows="scandata.wifi_scan_res" :columns="columns" row-key="ssid"
             hide-no-data="true" wrap-cells="true" @row-click="ClickOnRaw" />
         </q-card-section>
-        <q-card-actions>
-          <q-btn label="OK" @click="onOKClick" />
+        <q-card-actions align="center">
           <q-btn label="Cancel" @click="onDialogCancel" />
         </q-card-actions>
       </div>
@@ -23,6 +22,10 @@
 import { useDialogPluginComponent } from 'quasar'
 import { PostData } from "components/webguicomp/network";
 import { reactive, ref } from 'vue';
+import { useQuasar } from 'quasar'
+import { ShowDelayDialog } from "./helpers";
+
+const $q = useQuasar();
 
 defineEmits([
   // REQUIRED; need to specify some events that your
@@ -38,17 +41,22 @@ const { dialogRef, onDialogHide, onDialogOK, onDialogCancel } = useDialogPluginC
 //                    example: onDialogOK({ /*...*/ }) - with payload
 // onDialogCancel - Function to call to settle dialog with "cancel" outcome
 
-// this is part of our example (so not required)
-function onOKClick() {
-  // on OK, it is REQUIRED to
-  // call onDialogOK (with optional payload)
-  onDialogOK()
-  // or with payload: onDialogOK({ ... })
-  // ...and it will also hide the dialog automatically
-}
 
 function ClickOnRaw(evt, row, index) {
-  alert(`clicked SSID ${row.ssid}`)
+  $q.dialog({
+    title: 'Enter network key',
+    message: `Enter key for "${row.ssid}" network`,
+    prompt: {
+      model: '',
+      isValid: val => val.length > 2, // << here is the magic
+      type: 'text' // optional
+    },
+    cancel: true,
+    persistent: true
+  }).onOk(data => {
+    PostData({ wifi_sta_key: data, wifi_sta_ssid: row.ssid }, 1, 2, ShowDelayDialog('Data saving and reboot...', 10000, null))
+    onDialogOK();
+  })
 }
 
 function onDataReady() {
