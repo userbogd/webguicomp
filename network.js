@@ -5,7 +5,8 @@ import { Notify } from "quasar";
 const API_URL = "/api";
 const SHA256_HMAC_KEY = "mykey";
 
-function PostData(varlist, messtype, applytype, onfinished) {
+function PostDataControlled(varlist, messtype, applytype, onfinished, enable) {
+  if (!enable) return;
   var pld = {};
   var data = {};
   data.msgid = Math.floor(Date.now() / 1000);
@@ -18,14 +19,15 @@ function PostData(varlist, messtype, applytype, onfinished) {
   pld.data = data;
   pld.signature = sha256.hmac(SHA256_HMAC_KEY, JSON.stringify(data));
 
-
   api
     .post(API_URL, JSON.stringify(pld), {
       headers: { "Content-Type": "application/json" },
     })
     .then((response) => {
-      var resp = response.data.data.payload.variables;
-      for (var k in resp) varlist[k] = resp[k];
+      if (enable) {
+        var resp = response.data.data.payload.variables;
+        for (var k in resp) varlist[k] = resp[k];
+      }
       if (onfinished) onfinished();
     })
     .catch((err) => {
@@ -34,7 +36,11 @@ function PostData(varlist, messtype, applytype, onfinished) {
 
 }
 
-export { PostData };
+
+function PostData(varlist, messtype, applytype, onfinished) {
+  PostDataControlled(varlist, messtype, applytype, onfinished, true);
+}
+export { PostData, PostDataControlled };
 
 
 
