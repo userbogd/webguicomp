@@ -38,7 +38,7 @@ const data = reactive(init);
 
 let intervalId;
 function CheckFirmware() {
-  PostData({ ota_start: 1 }, 2, 0, null);
+  PostData({ ota_url: data.ota_url, ota_start: 1 }, 2, 0, null);
   intervalId = setInterval(() => {
     PostData(data, 2, 0, null);
   }, 1000)
