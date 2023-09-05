@@ -1,5 +1,5 @@
 <template>
-  <q-card flat bordered class="card">
+  <q-card flat class="card">
     <q-card-section>
       <div class="text-h6">SNTP</div>
     </q-card-section>

@@ -1,5 +1,5 @@
 <template>
-  <q-card flat bordered class="card" v-show="data.gsm_visible">
+  <q-card flat class="card" v-show="data.gsm_visible">
     <q-card-section>
       <div class="text-h6">GPRS MODEM</div>
     </q-card-section>

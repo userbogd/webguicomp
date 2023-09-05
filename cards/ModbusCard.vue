@@ -1,5 +1,5 @@
 <template>
-  <q-card flat bordered class="card" v-show="data.mbtcp_visible">
+  <q-card flat class="card" v-show="data.mbtcp_visible">
     <q-card-section>
       <div class="text-h6">MODBUS</div>
     </q-card-section>

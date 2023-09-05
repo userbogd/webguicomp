@@ -1,9 +1,8 @@
 <template>
-  <q-card flat bordered class="card" v-show="data.eth_visible">
+  <q-card flat class="card" v-show="data.eth_visible">
     <q-card-section>
       <div class="text-h6">ETHERNET</div>
     </q-card-section>
-
     <q-card-section class="q-pt-none">
       <div class="q-pa-md">
         <div class="q-gutter-md q-pa-none q-pb-none">
