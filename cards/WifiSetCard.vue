@@ -8,9 +8,8 @@
       <div class="q-pa-md">
         <div class="q-gutter-md q-pa-none q-pb-none">
           <q-toggle v-model="data.wifi_enab" label="WiFi enable" />
-          <q-btn label="Scan WiFi" @click="OpenScanDialog()"></q-btn>
-          <q-select v-model="wifimodestr" :options="wifimodes" :map-options="true" :emit-value="true"
-            label="WiFi mode"></q-select>
+          <q-btn class="btn" flat label="Scan WiFi" @click="OpenScanDialog()"></q-btn>
+          <q-select v-model="wifimodestr" :options="wifimodes" :map-options="true" :emit-value="true" label="WiFi mode"></q-select>
           <q-input type="number" v-model="wifipwr" label="Max power, dBm" />
           <q-input v-model="data.wifi_ap_ssid" label="WiFi network name(AP):" />
           <q-input type="password" v-model="data.wifi_ap_key" label="WiFi network key(AP):" />

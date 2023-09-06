@@ -13,7 +13,7 @@
           <div>Current firmware version: {{ data.fw_rev }}</div>
           <div>Available firmware version: {{ data.ota_newver }}</div>
           <div>Firmware status: <span v-html="data.ota_state"></span></div>
-          <q-btn label="Update manual" @click="CheckFirmware"></q-btn>
+          <q-btn flat class="btn" label="Update manual" @click="CheckFirmware"></q-btn>
         </div>
       </div>
     </q-card-section>

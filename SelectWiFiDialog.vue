@@ -1,6 +1,6 @@
 <template>
   <q-dialog ref="dialogRef" @hide="onDialogHide">
-    <q-card class="q-dialog-plugin">
+    <q-card flat class="q-dialog-plugin">
       <div class="q-pa-md q-gutter-md">
         <q-card-section v-if="visible" align="center">
           <div><q-circular-progress indeterminate size="50px" color="primary" class="q-ma-md"></q-circular-progress></div>
@@ -11,7 +11,7 @@
             :rows-per-page-options="[0]" :pagination="pagination" @row-click="ClickOnRaw" />
         </q-card-section>
         <q-card-actions align="center">
-          <q-btn label="Cancel" @click="onDialogCancel" />
+          <q-btn flat class="btn" label="Cancel" @click="onDialogCancel" />
         </q-card-actions>
       </div>
     </q-card>
