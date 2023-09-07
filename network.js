@@ -29,9 +29,11 @@ function PostDataControlled(varlist, messtype, applytype, onfinished, enable) {
         for (var k in resp) varlist[k] = resp[k];
       }
       if (onfinished) onfinished();
+
     })
     .catch((err) => {
       Notify.create({ color: "negative", position: "top", message: err.message, icon: "report_problem", });
+      console.log(JSON.stringify(err));
     });
 
 }
