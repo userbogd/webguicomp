@@ -29,7 +29,7 @@ function ShowDelayDialog(mess, time, onexpire) {
       clearInterval(interval)
       setTimeout(() => {
         dialog.hide();
-        onexpire();
+        onexpire;
       }, 500)
     }
   }, 100)
