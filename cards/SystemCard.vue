@@ -13,10 +13,12 @@
             label="Color scheme"></q-select>
           <div>Device model: {{ data.model_name }}</div>
           <div>Hardware revision: {{ data.hw_rev }}</div>
+          <div>Hardware option: {{ data.hw_opt }}</div>
           <div>Firmware version: {{ data.fw_rev }}</div>
           <div>IDF version: {{ data.idf_rev }}</div>
           <div>Build date: {{ data.build_date }}</div>
-          <div>Serial number: {{ data.ser_num }}</div>
+          <div>Device ID: {{ data.dev_id }}</div>
+          <div>S/N: {{ data.ser_num }}</div>
         </div>
       </div>
     </q-card-section>
@@ -52,7 +54,7 @@ defineOptions({
 })
 const init = {
   net_bios_name: "", sys_name: "", sys_pass: "", color_scheme: 1,
-  model_name: "", hw_rev: 0, fw_rev: "", idf_rev: "", build_date: "", ser_num: ""
+  model_name: "", hw_rev: 0, hw_opt: "", fw_rev: "", idf_rev: "", build_date: "", dev_id: "", ser_num: ""
 }
 const colorschemes = [
   { label: 'Light', value: '1' },
