@@ -7,6 +7,9 @@
       <div class="q-pa-md">
         <div class="q-gutter-md q-pa-none q-pb-none">
           <q-toggle v-model="data.gsm_enab" label="GSM enable" />
+          <q-input v-model="data.gsm_apn" label="APN:" />
+          <q-input v-model="data.gsm_apn_login" label="login:" />
+          <q-input v-model="data.gsm_apn_password" label="password:" />
           <div>Module type: {{ data.gsm_module }}</div>
           <div>Provider name: {{ data.gsm_operator }}</div>
           <div>IMEI: {{ data.gsm_imei }}</div>
@@ -31,6 +34,9 @@ import CardActions from "components/webguicomp/CardActions.vue"
 const init = {
   gsm_visible: false,
   gsm_enab: false,
+  gsm_apn: '',
+  gsm_apn_login: '',
+  gsm_apn_password: '',
   gsm_module: '',
   gsm_operator: '',
   gsm_imei: '',
