@@ -6,10 +6,10 @@
     <q-card-section class="q-pt-none">
       <div class="q-pa-md">
         <div class="q-gutter-md q-pa-none q-pb-none">
-          <q-toggle v-model="data.gsm_enab" label="GSM enable" />
+          <div><q-toggle v-model="data.gsm_enab" label="GSM enable" /></div>
           <q-input v-model="data.gsm_apn" label="APN:" />
-          <q-input v-model="data.gsm_apn_login" label="login:" />
-          <q-input v-model="data.gsm_apn_password" label="password:" />
+          <!--<q-input v-model="data.gsm_apn_login" label="login:" />
+          <q-input v-model="data.gsm_apn_password" label="password:" />-->
           <div>Module type: {{ data.gsm_module }}</div>
           <div>Provider name: {{ data.gsm_operator }}</div>
           <div>IMEI: {{ data.gsm_imei }}</div>
@@ -28,7 +28,7 @@
 </template>
 
 <script setup>
-import { reactive } from "vue";
+import { reactive, computed } from "vue";
 import { PostData } from "components/webguicomp/network";
 import CardActions from "components/webguicomp/CardActions.vue"
 const init = {

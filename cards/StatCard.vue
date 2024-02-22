@@ -10,6 +10,7 @@
           <div>{{ timestr }}</div>
           <div>Uptime: {{ uptimestr }}</div>
           <div>WiFi signal: {{ data.wifi_level }}</div>
+          <div>GSM signal: {{ gsm_sig }}</div>
           <q-separator inset />
           <div>Ethernet state: {{ data.eth_stat }}</div>
           <div>WiFi state: {{ data.wifi_stat }}</div>
@@ -23,8 +24,6 @@
         </div>
       </div>
     </q-card-section>
-
-
   </q-card>
 </template>
 
@@ -40,6 +39,7 @@ defineOptions({
 const init = {
   time: 0, uptime: 0,
   wifi_level: "",
+  gsm_rssi: -1,
   eth_stat: "",
   wifi_stat: "",
   gsm_stat: "",
@@ -59,4 +59,12 @@ onUnmounted(() => clearInterval(intervalId))
 const timestr = computed({ get() { return (new Date(data.time * 1000).toISOString()) } })
 const uptimestr = computed({ get() { return (secondsToHms(data.uptime)) } })
 PostData(data, 2, 0, null);
+const gsm_sig = computed({
+  get() {
+    if (Number(data.gsm_rssi) == -1)
+      return '-';
+    return (-113 + 2 * Number(data.gsm_rssi)) + " dBm"
+  },
+  set(val) { }
+})
 </script>
