@@ -4,12 +4,14 @@ import { Notify } from "quasar";
 
 const API_URL = "/api";
 const SHA256_HMAC_KEY = "mykey";
+let MessIdCounter = 1;
 
 function PostDataControlled(varlist, messtype, applytype, onfinished, enable) {
   if (!enable) return;
   var pld = {};
   var data = {};
-  data.msgid = Math.floor(Date.now() / 1000);
+  //data.msgid = Math.floor(Date.now() / 1000);
+  data.msgid = Math.floor(Math.random() * 0x7fffffff);
   data.time = new Date().toISOString();
   data.msgtype = messtype;
   data.payloadtype = 1;
