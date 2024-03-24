@@ -1,12 +1,12 @@
 <template>
   <q-card flat class="card">
     <q-card-section>
-      <div class="text-h6">Home</div>
+      <div class="text-h6">FILES</div>
     </q-card-section>
     <q-card-section class="q-pt-none">
       <div class="q-pa-none">
-        <q-table title="File system" :rows="data.file_list" :columns="columns" row-key="name" selection="single"
-          v-model:selected="selected" :flat="true" :bordered="false" :rows-per-page-options="[10, 20, 30, 0]" />
+        <q-table :rows="data.file_list" :columns="columns" row-key="name" selection="single" v-model:selected="selected"
+          :flat="true" :bordered="false" :rows-per-page-options="[10, 20, 30, 0]" />
       </div>
       <div class="q-pa-md">
         <div><q-file v-model="file" label="Select file to upload" /></div>
@@ -15,11 +15,6 @@
         <q-btn class="btn q-ma-xs" flat label="DOWNLOAD" @click="DownloadFile"></q-btn>
         <q-btn class="btn q-ma-xs" flat label="UPLOAD" @click="UploadFile"></q-btn>
         <q-btn class="btn q-ma-xs" flat label="DELETE" @click="DeleteFile"></q-btn>
-        <q-btn class="btn q-ma-xs" flat label="TEST SAVE" @click="SaveFile"></q-btn>
-      </div>
-      <div class="row q-pa-md">
-
-
       </div>
     </q-card-section>
   </q-card>
@@ -28,7 +23,6 @@
 <script setup>
 import { computed, onUnmounted, reactive, onMounted, ref } from "vue";
 import { PostData } from "components/webguicomp//network";
-import { secondsToHms } from "components/webguicomp/helpers"
 import { useQuasar, Dialog } from 'quasar';
 const $q = useQuasar();
 
@@ -84,7 +78,6 @@ function ReceiveChunk(cur, total, chunk) {
   })
 }
 
-
 function base64ToArrayBuffer(base64) {
   var binaryString = atob(base64);
   var bytes = new Uint8Array(binaryString.length);
@@ -119,8 +112,6 @@ async function DownloadFile() {
     SaveFile(buf, selected.value[0].name);
   }
 }
-
-
 
 function ToBase64(bytes) {
   var binary = '';
