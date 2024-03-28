@@ -15,17 +15,12 @@
         <q-btn class="btn q-ma-xs" flat label="DOWNLOAD" @click="DownloadFile"></q-btn>
         <q-btn class="btn q-ma-xs" flat label="UPLOAD" @click="UploadFile"></q-btn>
         <q-btn class="btn q-ma-xs" flat label="DELETE" @click="DeleteFile"></q-btn>
-
-        <q-btn class="btn q-ma-xs" flat label="GET ART" @click="GetArtnetTest"></q-btn>
-        <q-btn class="btn q-ma-xs" flat label="PUT ART" @click="PutArtnetTest"></q-btn>
-
       </div>
     </q-card-section>
   </q-card>
 </template>
 
 <script setup>
-import { GetArtnetTest, PutArtnetTest } from "assets/dimmer"
 import { computed, onUnmounted, reactive, onMounted, ref } from "vue";
 import { GetBlockObject, PutBlockObject, PostData } from "components/webguicomp//network";
 import { useQuasar, Dialog } from 'quasar';
@@ -66,13 +61,13 @@ async function DownloadFile() {
   if (selected.value[0]) {
     const buf = new Uint8Array(selected.value[0].size);
     //await ReveiveFileChunks(buf);
-    await GetBlockObject('file_block', selected.value[0].name, selected.value[0].size, buf);
+    await GetBlockObject('file_block', selected.value[0].name, selected.value[0].size, buf, true);
     SaveFile(buf, selected.value[0].name);
   }
 }
 
 async function SendFile(buf) {
-  await PutBlockObject('file_block', file.value.name, file.value.size, buf);
+  await PutBlockObject('file_block', file.value.name, file.value.size, buf, true);
   PostData(data, 2, 0, null);
 }
 
