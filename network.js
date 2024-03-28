@@ -9,7 +9,7 @@ let MessIdCounter = 1;
 const BLOCK_SIZE = 5120;
 function ReceiveChunk(cur, total, name) {
   let data = {
-    raw_data: {
+    file_block: {
       opertype: 1,
       part: cur,
       parts: total,
@@ -43,13 +43,13 @@ async function GetBlockObject(name, size, buf) {
   const dialog = Dialog.create({ message: `File "${name}" download 0%`, progress: true, persistent: true, ok: false, style: 'border: none; box-shadow: none;' })
   for (i = 0; i < partsnum; i++) {
     resp = await ReceiveChunk(i, partsnum, name);
-    if (typeof resp.raw_data === 'string' || resp.raw_data instanceof String) {
+    if (typeof resp.file_block === 'string' || resp.file_block instanceof String) {
       dialog.hide();
-      Notify.create({ color: "negative", position: "top", message: resp.raw_data, icon: "report_problem", });
+      Notify.create({ color: "negative", position: "top", message: resp.file_block, icon: "report_problem", });
       return;
     }
 
-    let decoded = base64ToArrayBuffer(resp.raw_data.dat);
+    let decoded = base64ToArrayBuffer(resp.file_block.dat);
     for (let k = 0; k < decoded.byteLength; k++)
       buf[i * BLOCK_SIZE + k] = decoded[k];
     dialog.update({ message: `File "${name}"  download ${Math.floor(i * 100 / partsnum)}%` })
@@ -76,7 +76,7 @@ function SendChunk(cur, total, name, buf) {
     let encode = ToBase64(arr);
     let length = encode.length;
     let data = {
-      raw_data: {
+      file_block: {
         opertype: 3,
         part: cur,
         parts: total,
@@ -101,9 +101,9 @@ async function PutBlockObject(name, size, buf) {
   const dialog = Dialog.create({ message: `File "${name}" upload 0%`, progress: true, persistent: true, ok: false, style: 'border: none; box-shadow: none;' })
   for (i = 0; i < partsnum; i++) {
     resp = await SendChunk(i, partsnum, name, buf);
-    if (typeof resp.raw_data === 'string' || resp.raw_data instanceof String) {
+    if (typeof resp.file_block === 'string' || resp.file_block instanceof String) {
       dialog.hide();
-      Notify.create({ color: "negative", position: "top", message: resp.raw_data, icon: "report_problem", });
+      Notify.create({ color: "negative", position: "top", message: resp.file_block, icon: "report_problem", });
       return;
     }
     dialog.update({ message: `File "${name}" upload ${Math.floor(i * 100 / partsnum)}%` })

@@ -93,7 +93,7 @@ function DeleteFile() {
       const dialog = Dialog.create({ message: `Deleting file "${selected.value[0].name}"...`, progress: true, persistent: true, ok: false, style: 'border: none; box-shadow: none;' })
 
       PostData({
-        raw_data: {
+        file_block: {
           opertype: 2,
           part: 0,
           parts: 1,
