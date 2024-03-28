@@ -7,9 +7,9 @@ const SHA256_HMAC_KEY = "mykey";
 let MessIdCounter = 1;
 
 const BLOCK_SIZE = 5120;
-function ReceiveChunk(cur, total, name) {
+function ReceiveChunk(cur, total, name, namespase) {
   let data = {
-    file_block: {
+    [namespase]: {
       opertype: 1,
       part: cur,
       parts: total,
@@ -33,7 +33,7 @@ function base64ToArrayBuffer(base64) {
   return bytes;
 }
 
-async function GetBlockObject(name, size, buf) {
+async function GetBlockObject(namespase, name, size, buf) {
   let partsnum = Math.floor(size / BLOCK_SIZE);
   if (size % BLOCK_SIZE)
     partsnum++;
@@ -42,7 +42,7 @@ async function GetBlockObject(name, size, buf) {
   let resp;
   const dialog = Dialog.create({ message: `File "${name}" download 0%`, progress: true, persistent: true, ok: false, style: 'border: none; box-shadow: none;' })
   for (i = 0; i < partsnum; i++) {
-    resp = await ReceiveChunk(i, partsnum, name);
+    resp = await ReceiveChunk(i, partsnum, name, namespase);
     if (typeof resp.file_block === 'string' || resp.file_block instanceof String) {
       dialog.hide();
       Notify.create({ color: "negative", position: "top", message: resp.file_block, icon: "report_problem", });
@@ -66,7 +66,7 @@ function ToBase64(bytes) {
   return window.btoa(binary);
 }
 
-function SendChunk(cur, total, name, buf) {
+function SendChunk(cur, total, name, namespase, buf) {
   return new Promise((resolve, reject) => {
     let arr;
     if (cur == (total - 1))
@@ -75,8 +75,9 @@ function SendChunk(cur, total, name, buf) {
       arr = new Uint8Array(buf, cur * BLOCK_SIZE, BLOCK_SIZE);
     let encode = ToBase64(arr);
     let length = encode.length;
+
     let data = {
-      file_block: {
+      [namespase]: {
         opertype: 3,
         part: cur,
         parts: total,
@@ -91,7 +92,7 @@ function SendChunk(cur, total, name, buf) {
   })
 }
 
-async function PutBlockObject(name, size, buf) {
+async function PutBlockObject(namespase, name, size, buf) {
   let partsnum = Math.floor(size / BLOCK_SIZE);
   if (size % BLOCK_SIZE)
     partsnum++;
@@ -100,7 +101,7 @@ async function PutBlockObject(name, size, buf) {
   let resp;
   const dialog = Dialog.create({ message: `File "${name}" upload 0%`, progress: true, persistent: true, ok: false, style: 'border: none; box-shadow: none;' })
   for (i = 0; i < partsnum; i++) {
-    resp = await SendChunk(i, partsnum, name, buf);
+    resp = await SendChunk(i, partsnum, name, namespase, buf);
     if (typeof resp.file_block === 'string' || resp.file_block instanceof String) {
       dialog.hide();
       Notify.create({ color: "negative", position: "top", message: resp.file_block, icon: "report_problem", });

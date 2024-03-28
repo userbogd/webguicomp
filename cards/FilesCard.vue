@@ -61,13 +61,13 @@ async function DownloadFile() {
   if (selected.value[0]) {
     const buf = new Uint8Array(selected.value[0].size);
     //await ReveiveFileChunks(buf);
-    await GetBlockObject(selected.value[0].name, selected.value[0].size, buf);
+    await GetBlockObject('file_block', selected.value[0].name, selected.value[0].size, buf);
     SaveFile(buf, selected.value[0].name);
   }
 }
 
 async function SendFile(buf) {
-  await PutBlockObject(file.value.name, file.value.size, buf);
+  await PutBlockObject('file_block', file.value.name, file.value.size, buf);
   PostData(data, 2, 0, null);
 }
 
