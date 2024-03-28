@@ -43,13 +43,13 @@ async function GetBlockObject(namespase, name, size, buf) {
   const dialog = Dialog.create({ message: `File "${name}" download 0%`, progress: true, persistent: true, ok: false, style: 'border: none; box-shadow: none;' })
   for (i = 0; i < partsnum; i++) {
     resp = await ReceiveChunk(i, partsnum, name, namespase);
-    if (typeof resp.file_block === 'string' || resp.file_block instanceof String) {
+    if (typeof resp[namespase] === 'string' || resp[namespase] instanceof String) {
       dialog.hide();
-      Notify.create({ color: "negative", position: "top", message: resp.file_block, icon: "report_problem", });
+      Notify.create({ color: "negative", position: "top", message: resp[namespase], icon: "report_problem", });
       return;
     }
 
-    let decoded = base64ToArrayBuffer(resp.file_block.dat);
+    let decoded = base64ToArrayBuffer(resp[namespase].dat);
     for (let k = 0; k < decoded.byteLength; k++)
       buf[i * BLOCK_SIZE + k] = decoded[k];
     dialog.update({ message: `File "${name}"  download ${Math.floor(i * 100 / partsnum)}%` })
@@ -102,9 +102,9 @@ async function PutBlockObject(namespase, name, size, buf) {
   const dialog = Dialog.create({ message: `File "${name}" upload 0%`, progress: true, persistent: true, ok: false, style: 'border: none; box-shadow: none;' })
   for (i = 0; i < partsnum; i++) {
     resp = await SendChunk(i, partsnum, name, namespase, buf);
-    if (typeof resp.file_block === 'string' || resp.file_block instanceof String) {
+    if (typeof resp[namespase] === 'string' || resp[namespase] instanceof String) {
       dialog.hide();
-      Notify.create({ color: "negative", position: "top", message: resp.file_block, icon: "report_problem", });
+      Notify.create({ color: "negative", position: "top", message: resp[namespase], icon: "report_problem", });
       return;
     }
     dialog.update({ message: `File "${name}" upload ${Math.floor(i * 100 / partsnum)}%` })

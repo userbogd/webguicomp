@@ -15,12 +15,17 @@
         <q-btn class="btn q-ma-xs" flat label="DOWNLOAD" @click="DownloadFile"></q-btn>
         <q-btn class="btn q-ma-xs" flat label="UPLOAD" @click="UploadFile"></q-btn>
         <q-btn class="btn q-ma-xs" flat label="DELETE" @click="DeleteFile"></q-btn>
+
+        <q-btn class="btn q-ma-xs" flat label="GET ART" @click="GetArtnetTest"></q-btn>
+        <q-btn class="btn q-ma-xs" flat label="PUT ART" @click="PutArtnetTest"></q-btn>
+
       </div>
     </q-card-section>
   </q-card>
 </template>
 
 <script setup>
+import { GetArtnetTest, PutArtnetTest } from "assets/dimmer"
 import { computed, onUnmounted, reactive, onMounted, ref } from "vue";
 import { GetBlockObject, PutBlockObject, PostData } from "components/webguicomp//network";
 import { useQuasar, Dialog } from 'quasar';
@@ -104,6 +109,7 @@ function DeleteFile() {
     })
   }
 }
+
 
 const init = {
   file_list: [init_list]
