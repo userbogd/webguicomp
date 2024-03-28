@@ -8,15 +8,11 @@ let MessIdCounter = 1;
 
 const BLOCK_SIZE = 5120;
 function ReceiveChunk(cur, total, name) {
-  let foper;
-  if (total == 1) foper = 3;
-  else if (cur == 0) foper = 1;
-  else if (cur == (total - 1)) foper = 2;
-  else foper = 0;
   let data = {
     raw_data: {
       opertype: 1,
-      operphase: foper,
+      part: cur,
+      parts: total,
       mem_object: name,
       size: BLOCK_SIZE,
       dat: ''
@@ -44,13 +40,19 @@ async function GetBlockObject(name, size, buf) {
   console.log(`Found ${partsnum} blocks in file ${name}`)
   let i;
   let resp;
-  const dialog = Dialog.create({ message: 'Downloaded 0%', progress: true, persistent: true, ok: false, style: 'border: none; box-shadow: none;' })
+  const dialog = Dialog.create({ message: `File "${name}" download 0%`, progress: true, persistent: true, ok: false, style: 'border: none; box-shadow: none;' })
   for (i = 0; i < partsnum; i++) {
     resp = await ReceiveChunk(i, partsnum, name);
+    if (typeof resp.raw_data === 'string' || resp.raw_data instanceof String) {
+      dialog.hide();
+      Notify.create({ color: "negative", position: "top", message: resp.raw_data, icon: "report_problem", });
+      return;
+    }
+
     let decoded = base64ToArrayBuffer(resp.raw_data.dat);
     for (let k = 0; k < decoded.byteLength; k++)
       buf[i * BLOCK_SIZE + k] = decoded[k];
-    dialog.update({ message: `Downloaded ${Math.floor(i * 100 / partsnum)}%` })
+    dialog.update({ message: `File "${name}"  download ${Math.floor(i * 100 / partsnum)}%` })
   }
   dialog.hide();
 }
@@ -73,17 +75,11 @@ function SendChunk(cur, total, name, buf) {
       arr = new Uint8Array(buf, cur * BLOCK_SIZE, BLOCK_SIZE);
     let encode = ToBase64(arr);
     let length = encode.length;
-
-    let foper;
-    if (total == 1) foper = 3;
-    else if (cur == 0) foper = 1;
-    else if (cur == (total - 1)) foper = 2;
-    else foper = 0;
-
     let data = {
       raw_data: {
         opertype: 3,
-        operphase: foper,
+        part: cur,
+        parts: total,
         mem_object: name,
         size: length,
         dat: encode
@@ -91,7 +87,7 @@ function SendChunk(cur, total, name, buf) {
     };
 
     console.log(`Send chunk ${cur} from ${total} length ${arr.byteLength}`)
-    PostData(data, 1, 0, () => resolve())
+    PostData(data, 1, 0, () => resolve(data))
   })
 }
 
@@ -101,10 +97,16 @@ async function PutBlockObject(name, size, buf) {
     partsnum++;
   console.log(`Found ${partsnum} blocks in file`)
   let i;
-  const dialog = Dialog.create({ message: 'Uploaded 0%', progress: true, persistent: true, ok: false, style: 'border: none; box-shadow: none;' })
+  let resp;
+  const dialog = Dialog.create({ message: `File "${name}" upload 0%`, progress: true, persistent: true, ok: false, style: 'border: none; box-shadow: none;' })
   for (i = 0; i < partsnum; i++) {
-    await SendChunk(i, partsnum, name, buf);
-    dialog.update({ message: `Uploaded ${Math.floor(i * 100 / partsnum)}%` })
+    resp = await SendChunk(i, partsnum, name, buf);
+    if (typeof resp.raw_data === 'string' || resp.raw_data instanceof String) {
+      dialog.hide();
+      Notify.create({ color: "negative", position: "top", message: resp.raw_data, icon: "report_problem", });
+      return;
+    }
+    dialog.update({ message: `File "${name}" upload ${Math.floor(i * 100 / partsnum)}%` })
   }
   dialog.hide();
 }

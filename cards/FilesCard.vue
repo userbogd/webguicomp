@@ -90,14 +90,14 @@ function DeleteFile() {
       cancel: true,
       persistent: true
     }).onOk(() => {
-      const dialog = Dialog.create({ message: 'Waiting for delete finished...', progress: true, persistent: true, ok: false, style: 'border: none; box-shadow: none;' })
+      const dialog = Dialog.create({ message: `Deleting file "${selected.value[0].name}"...`, progress: true, persistent: true, ok: false, style: 'border: none; box-shadow: none;' })
 
       PostData({
         raw_data: {
           opertype: 2,
-          operphase: 3,
+          part: 0,
+          parts: 1,
           mem_object: selected.value[0].name,
-          offset: 0,
           size: 0
         }
       }, 1, 0, () => { PostData(data, 2, 0, () => { dialog.hide(); }) })
