@@ -41,7 +41,7 @@ async function GetBlockObject(namespase, name, size, buf, verb) {
   let i;
   let resp, dialog;
   if (verb)
-    dialog = Dialog.create({ message: `File "${name}" download 0%`, progress: true, persistent: true, ok: false, style: 'border: none; box-shadow: none;' })
+    dialog = Dialog.create({ message: `File "${name}" downloading...`, progress: true, persistent: true, ok: false, style: 'border: none; box-shadow: none;' })
   for (i = 0; i < partsnum; i++) {
     resp = await ReceiveChunk(i, partsnum, name, namespase);
     if (typeof resp[namespase] === 'string' || resp[namespase] instanceof String) {
@@ -55,7 +55,7 @@ async function GetBlockObject(namespase, name, size, buf, verb) {
     for (let k = 0; k < decoded.byteLength; k++)
       buf[i * BLOCK_SIZE + k] = decoded[k];
     if (verb)
-      dialog.update({ message: `File "${name}"  download ${Math.floor(i * 100 / partsnum)}%` })
+      dialog.update({ message: `File "${name}"  download ${Math.floor((i + 1) * 100 / partsnum)}%` })
   }
   if (verb)
     dialog.hide();
@@ -104,7 +104,7 @@ async function PutBlockObject(namespase, name, size, buf, verb) {
   let i;
   let resp, dialog;
   if (verb)
-    dialog = Dialog.create({ message: `File "${name}" upload 0%`, progress: true, persistent: true, ok: false, style: 'border: none; box-shadow: none;' })
+    dialog = Dialog.create({ message: `File "${name}" uploading...`, progress: true, persistent: true, ok: false, style: 'border: none; box-shadow: none;' })
   for (i = 0; i < partsnum; i++) {
     resp = await SendChunk(i, partsnum, name, namespase, buf);
     if (typeof resp[namespase] === 'string' || resp[namespase] instanceof String) {
@@ -114,7 +114,7 @@ async function PutBlockObject(namespase, name, size, buf, verb) {
       return;
     }
     if (verb)
-      dialog.update({ message: `File "${name}" upload ${Math.floor(i * 100 / partsnum)}%` })
+      dialog.update({ message: `File "${name}" upload ${Math.floor((i + 1) * 100 / partsnum)}%` })
   }
   if (verb)
     dialog.hide();
