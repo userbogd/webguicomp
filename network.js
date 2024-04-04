@@ -150,6 +150,7 @@ function PostDataControlled(varlist, messtype, applytype, onfinished, enable) {
     .catch((err) => {
       Notify.create({ color: "negative", position: "top", message: err.message, icon: "report_problem", });
       console.log(JSON.stringify(err));
+      if (onfinished) onfinished();
     });
 
 }
