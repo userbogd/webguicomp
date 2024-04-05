@@ -8,7 +8,7 @@
         <div class="q-gutter-md q-pa-none q-pb-none">
           <q-toggle v-model="data.ota_enab" label="Eanble OTA autoudate" />
           <q-toggle v-model="data.res_ota_enab" label="Enable reset after update" />
-          <q-input v-model="data.ota_url" label="OTA firmware file URL" />
+          <q-input autogrow v-model="data.ota_url" label="OTA firmware file URL" />
           <q-input type="number" v-model="data.ota_auto_int" label="New firmware check interval, sec" />
           <div>Current firmware version: {{ data.fw_rev }}</div>
           <div>Available firmware version: {{ data.ota_newver }}</div>
