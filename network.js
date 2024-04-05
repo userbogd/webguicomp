@@ -126,6 +126,8 @@ function PostDataControlled(varlist, messtype, applytype, onfinished, enable) {
   var data = {};
   //data.msgid = Math.floor(Date.now() / 1000);
   data.msgid = Math.floor(Math.random() * 0x7fffffff);
+  data.srcid = 'FFFFFFFF';
+  data.dstid = '0000FFFF'
   data.time = new Date().toISOString();
   data.msgtype = messtype;
   data.payloadtype = 1;
