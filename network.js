@@ -19,7 +19,7 @@ function ReceiveChunk(cur, total, name, namespase) {
     }
   };
   return new Promise((resolve, reject) => {
-    console.log(`Receive chunk ${cur} from ${total}`)
+    //console.log(`Receive chunk ${cur} from ${total}`)
     PostData(data, 1, 0, () => resolve(data))
   })
 }
@@ -37,7 +37,7 @@ async function GetBlockObject(namespase, name, size, buf, verb) {
   let partsnum = Math.floor(size / BLOCK_SIZE);
   if (size % BLOCK_SIZE)
     partsnum++;
-  console.log(`Found ${partsnum} blocks in file ${name}`)
+  //console.log(`Found ${partsnum} blocks in file ${name}`)
   let i;
   let resp, dialog;
   if (verb)
@@ -91,7 +91,7 @@ function SendChunk(cur, total, name, namespase, buf) {
       }
     };
 
-    console.log(`Send chunk ${cur} from ${total} length ${arr.byteLength}`)
+    //console.log(`Send chunk ${cur} from ${total} length ${arr.byteLength}`)
     PostData(data, 1, 0, () => resolve(data))
   })
 }
@@ -100,7 +100,7 @@ async function PutBlockObject(namespase, name, size, buf, verb) {
   let partsnum = Math.floor(size / BLOCK_SIZE);
   if (size % BLOCK_SIZE)
     partsnum++;
-  console.log(`Found ${partsnum} blocks in file`)
+  //console.log(`Found ${partsnum} blocks in file`)
   let i;
   let resp, dialog;
   if (verb)
