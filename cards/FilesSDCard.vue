@@ -1,11 +1,11 @@
 <template>
-  <q-card flat class="card">
+  <q-card flat class="card" v-show="data.sd_visible">
     <q-card-section>
-      <div class="text-h6">System storage</div>
+      <div class="text-h6">SD Card</div>
     </q-card-section>
     <q-card-section class="q-pt-none">
       <div class="q-pa-none">
-        <q-table :rows="data.file_list" :columns="columns" row-key="name" selection="single" v-model:selected="selected"
+        <q-table :rows="data.sd_list" :columns="columns" row-key="name" selection="single" v-model:selected="selected"
           :flat="true" :bordered="false" :rows-per-page-options="[10, 20, 30, 0]" />
       </div>
       <div class="q-pa-md">
@@ -35,7 +35,7 @@ const columns = [
 ]
 
 defineOptions({
-  name: 'FilesCard'
+  name: 'FilesSDCard'
 })
 
 const BLOCK_SIZE = 5120;
@@ -64,13 +64,13 @@ async function DownloadFile() {
   if (selected.value[0]) {
     const buf = new Uint8Array(selected.value[0].size);
     //await ReveiveFileChunks(buf);
-    await GetBlockObject('file_block', selected.value[0].name, selected.value[0].size, buf, true);
+    await GetBlockObject('sd_block', selected.value[0].name, selected.value[0].size, buf, true);
     SaveFile(buf, selected.value[0].name);
   }
 }
 
 async function SendFile(buf) {
-  await PutBlockObject('file_block', file.value.name, file.value.size, buf, true);
+  await PutBlockObject('sd_block', file.value.name, file.value.size, buf, true);
   PostData(data, 2, 0, null);
 }
 
@@ -96,7 +96,7 @@ function DeleteFile() {
       const dialog = Dialog.create({ message: `Deleting file "${selected.value[0].name}"...`, progress: true, persistent: true, ok: false, style: 'border: none; box-shadow: none;' })
 
       PostData({
-        file_block: {
+        sd_block: {
           opertype: 2,
           part: 0,
           parts: 1,
@@ -110,7 +110,8 @@ function DeleteFile() {
 
 
 const init = {
-  file_list: [init_list]
+  sd_visible: false,
+  sd_list: [init_list]
 }
 
 const data = reactive(init);
