@@ -1,7 +1,7 @@
 <template>
   <q-card flat class="card">
     <q-card-section>
-      <div class="text-h6">System storage</div>
+      <div class="text-h6">File storage</div>
     </q-card-section>
     <q-card-section class="q-pt-none">
       <div class="q-pa-none">
