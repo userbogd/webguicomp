@@ -13,21 +13,31 @@
         </div>
       </div>
     </q-card-section>
+    <q-card-section class="q-pt-none">
+      <div class="q-pa-md">
+        <q-btn flat class="btn" label="Set time from system" @click="SetTimeFromSystem"></q-btn>
+      </div>
+    </q-card-section>
     <CardActions :senddata="data"></CardActions>
   </q-card>
 </template>
 
 <script setup>
-import { reactive } from "vue";
+import { reactive, computed } from "vue";
 import { PostData } from "components/webguicomp/network";
 import CardActions from "components/webguicomp/CardActions.vue"
+//const timestr = reactive(new Date().toISOString().replace("T", " ").substring(0, 19));
 
+function SetTimeFromSystem() {
+  let time = Math.floor(new Date() / 1000);
+  PostData({ time_set: time }, 1, 0);
+}
 
 const init = {
   sntp_serv1: "",
   sntp_serv2: "",
   sntp_serv3: "",
-  sntp_enab: false
+  sntp_enab: false,
 }
 
 const data = reactive(init);
