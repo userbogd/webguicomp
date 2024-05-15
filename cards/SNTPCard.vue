@@ -18,6 +18,12 @@
         <q-btn flat class="btn" label="Set time from system" @click="SetTimeFromSystem"></q-btn>
       </div>
     </q-card-section>
+    <q-card-section class="q-pt-none">
+      <div class="row">
+        <div class="q-pa-md col-6"><q-input v-model="data.lat" label="Latitude" /></div>
+        <div class="q-pa-md col-6"><q-input v-model="data.lon" label="Longitude" /></div>
+      </div>
+    </q-card-section>
     <CardActions :senddata="data"></CardActions>
   </q-card>
 </template>
@@ -38,6 +44,8 @@ const init = {
   sntp_serv2: "",
   sntp_serv3: "",
   sntp_enab: false,
+  lat: 0,
+  lon: 0
 }
 
 const data = reactive(init);
