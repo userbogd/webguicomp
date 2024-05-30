@@ -15,6 +15,7 @@
           <div>Ethernet state: {{ data.eth_stat }}</div>
           <div>WiFi state: {{ data.wifi_stat }}</div>
           <div>GPRS state: {{ data.gsm_stat }}</div>
+          <div>Def interface: {{ data.def_interface }}</div>
           <q-separator inset />
           <div>MQTT1 state: {{ data.mqtt_1_stat }}</div>
           <div>MQTT2 state: {{ data.mqtt_2_stat }}</div>
@@ -43,6 +44,7 @@ const init = {
   eth_stat: "",
   wifi_stat: "",
   gsm_stat: "",
+  def_interface: "",
   mqtt_1_stat: "",
   mqtt_2_stat: "",
   free_ram: 0,
