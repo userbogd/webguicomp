@@ -7,9 +7,10 @@ const SHA256_HMAC_KEY = "mykey";
 let MessIdCounter = 1;
 
 const BLOCK_SIZE = 5120;
-function ReceiveChunk(cur, total, name, namespase) {
+function ReceiveChunk(cur, total, name, namespase, trid) {
   let data = {
     [namespase]: {
+      transid: trid,
       opertype: 1,
       part: cur,
       parts: total,
@@ -37,13 +38,14 @@ async function GetBlockObject(namespase, name, size, buf, verb) {
   let partsnum = Math.floor(size / BLOCK_SIZE);
   if (size % BLOCK_SIZE)
     partsnum++;
+  let transid = Math.floor(Math.random() * 0x7fffffff);
   //console.log(`Found ${partsnum} blocks in file ${name}`)
   let i;
   let resp, dialog;
   if (verb)
     dialog = Dialog.create({ message: `File "${name}" downloading...`, progress: true, persistent: true, ok: false, style: 'border: none; box-shadow: none;' })
   for (i = 0; i < partsnum; i++) {
-    resp = await ReceiveChunk(i, partsnum, name, namespase);
+    resp = await ReceiveChunk(i, partsnum, name, namespase, transid);
     if (typeof resp[namespase] === 'string' || resp[namespase] instanceof String) {
       if (verb)
         dialog.hide();
@@ -70,7 +72,7 @@ function ToBase64(bytes) {
   return window.btoa(binary);
 }
 
-function SendChunk(cur, total, name, namespase, buf) {
+function SendChunk(cur, total, name, namespase, buf, trid) {
   return new Promise((resolve, reject) => {
     let arr;
     if (cur == (total - 1))
@@ -82,6 +84,7 @@ function SendChunk(cur, total, name, namespase, buf) {
 
     let data = {
       [namespase]: {
+        transid: trid,
         opertype: 3,
         part: cur,
         parts: total,
@@ -101,12 +104,13 @@ async function PutBlockObject(namespase, name, size, buf, verb) {
   if (size % BLOCK_SIZE)
     partsnum++;
   //console.log(`Found ${partsnum} blocks in file`)
+  let transid = Math.floor(Math.random() * 0x7fffffff);
   let i;
   let resp, dialog;
   if (verb)
     dialog = Dialog.create({ message: `File "${name}" uploading...`, progress: true, persistent: true, ok: false, style: 'border: none; box-shadow: none;' })
   for (i = 0; i < partsnum; i++) {
-    resp = await SendChunk(i, partsnum, name, namespase, buf);
+    resp = await SendChunk(i, partsnum, name, namespase, buf, transid);
     if (typeof resp[namespase] === 'string' || resp[namespase] instanceof String) {
       if (verb)
         dialog.hide();
