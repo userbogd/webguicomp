@@ -97,6 +97,7 @@ function DeleteFile() {
 
       PostData({
         file_block: {
+          transid: Math.floor(Math.random() * 0x7fffffff),
           opertype: 2,
           part: 0,
           parts: 1,
