@@ -4,6 +4,7 @@
       <div class="text-h6">CRON Scheduler</div>
     </q-card-section>
     <q-card-section class="q-pt-none">
+      <q-toggle v-model="data.cronrecs_enab" label="Eanble CRON" />
       <q-expansion-item v-for="(cronrec) in data.cronrecs" :key="cronrec.num" :label="list_header(cronrec)"
         v-show="!cronrec.del">
         <q-card flat bordered>
@@ -36,6 +37,7 @@
         <q-btn class="btn" flat v-on:click="AddCronRecord">Add task</q-btn>
       </div>
     </q-card-actions>
+    <CardActions :senddata="data"></CardActions>
   </q-card>
 </template>
 
@@ -43,6 +45,7 @@
 import { reactive, computed } from "vue";
 import { PostData } from "components/webguicomp/network";
 import { ShowDelayDialog } from "components/webguicomp/helpers";
+import CardActions from "components/webguicomp/CardActions.vue";
 
 const typestr = computed({
   get() { return (data.cronrecs[key - 1].type).toString() }
@@ -71,6 +74,7 @@ function initrecs() {
 };
 
 const init = {
+  cronrecs_enab: true,
   cronrecs: initrecs()
 }
 
